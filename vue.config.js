@@ -10,6 +10,7 @@ function resolve(dir) {
 }
 
 module.exports = {
+  parallel: false,
   outputDir: './dist',
   publicPath: '/',
   productionSourceMap: false,
@@ -35,10 +36,10 @@ module.exports = {
         })
         return options
       })
-    config.resolve.alias.set('@', resolve('src'))
-    config
-      .plugin('ignore')
-      .use(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
+    // config.resolve.alias.set('@', resolve('src'))
+    // config
+    //   .plugin('ignore')
+    //   .use(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
   },
   css: {
     sourceMap: true,
@@ -57,8 +58,8 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        // target: 'http://hsyapi.hsydata.com',
-        target: 'http://192.168.0.106:8089',
+        target: 'http://ldsxapi.dameicm.cn',
+        // target: 'http://192.168.0.106:8089',
         // target: 'http://192.168.0.85:8089',
         ws: false,
         changeOrigin: true,
