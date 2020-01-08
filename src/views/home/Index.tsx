@@ -42,7 +42,7 @@ export default class Home extends Vue {
     const csId = this.$route.query.csId
 
     this.$router.push({
-      path: this.isPay ? '/surveys' : '/payment',
+      path: !this.isPay ? '/surveys' : '/payment',
       query: {
         csId: csId
       }

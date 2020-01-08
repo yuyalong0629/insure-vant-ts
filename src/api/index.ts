@@ -13,7 +13,9 @@ const api = {
   schemeProblemInfoList: '/api/bx/schemeProblemInfoList',
   smsVerifyCode: '/api/smsVerifyCode',
   submitProblemInfo: '/api/user/submitProblemInfo',
-  getSalesInfo: '/api/user/getSalesInfo'
+  getSalesInfo: '/api/user/getSalesInfo',
+  schemePriceInfoList: '/api/bx/schemePriceInfoList',
+  myInsuranceInfo: '/api/user/myInsuranceInfo'
 }
 
 /**
@@ -87,6 +89,36 @@ export function getSalesInfo(parameter: any) {
   return axios({
     method: 'get',
     url: api.getSalesInfo,
+    params: parameter
+  })
+}
+
+/**
+ * @description: 方案价格
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: schemePriceInfoList
+ */
+
+export function schemePriceInfoList(parameter: any) {
+  return axios({
+    method: 'get',
+    url: api.schemePriceInfoList,
+    params: parameter
+  })
+}
+
+/**
+ * @description: 保单管理 => 请求列表
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: myInsuranceInfo
+ */
+
+export function myInsuranceInfo(parameter: any) {
+  return axios({
+    method: 'get',
+    url: api.myInsuranceInfo,
     params: parameter
   })
 }

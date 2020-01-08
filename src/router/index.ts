@@ -21,7 +21,7 @@ const routes = [
   {
     path: '/payment',
     name: 'payment',
-    meta: { title: '支付列表', hidden: false },
+    meta: { title: '咨询方案', hidden: false },
     component: () => import('@/views/payment/Index')
   },
   {
@@ -29,6 +29,12 @@ const routes = [
     name: 'market',
     meta: { title: '销售名片', hidden: false },
     component: () => import('@/views/market/Index')
+  },
+  {
+    path: '/policy',
+    name: 'policy',
+    meta: { title: '保单管理', hidden: false },
+    component: () => import('@/views/policy/Index')
   }
 ]
 

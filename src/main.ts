@@ -17,7 +17,12 @@ import {
   DatetimePicker,
   Picker,
   Checkbox,
-  CheckboxGroup
+  CheckboxGroup,
+  Grid,
+  GridItem,
+  Dialog,
+  List,
+  PullRefresh
 } from 'vant'
 
 Vue.use(Image)
@@ -32,6 +37,10 @@ Vue.use(Popup)
 Vue.use(DatetimePicker)
 Vue.use(Picker)
 Vue.use(Checkbox).use(CheckboxGroup)
+Vue.use(Grid).use(GridItem)
+Vue.use(Dialog)
+Vue.use(List)
+Vue.use(PullRefresh)
 
 Vue.config.productionTip = false
 

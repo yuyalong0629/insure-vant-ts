@@ -7,7 +7,7 @@ export default class App extends Vue {
   public userId: number = 0
 
   public mounted() {
-    this.$ls.set('userId', 0)
+    this.$ls.set('userId', 1)
     this.$ls.set('token', '')
 
     const isAuthorize = this.$ls.get('authorize') || true
