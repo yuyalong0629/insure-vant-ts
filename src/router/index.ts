@@ -17,6 +17,18 @@ const routes = [
     name: 'surveys',
     meta: { title: '问卷调查', hidden: false },
     component: () => import('@/views/surveys/Index')
+  },
+  {
+    path: '/payment',
+    name: 'payment',
+    meta: { title: '支付列表', hidden: false },
+    component: () => import('@/views/payment/Index')
+  },
+  {
+    path: '/market',
+    name: 'market',
+    meta: { title: '销售名片', hidden: false },
+    component: () => import('@/views/market/Index')
   }
 ]
 

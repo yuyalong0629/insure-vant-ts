@@ -9,7 +9,26 @@ import qs from 'qs'
  */
 
 const api = {
-  schemeProblemInfoList: '/api/bx/schemeProblemInfoList'
+  customizeSchemeInfo: '/api/bx/customizeSchemeInfo',
+  schemeProblemInfoList: '/api/bx/schemeProblemInfoList',
+  smsVerifyCode: '/api/smsVerifyCode',
+  submitProblemInfo: '/api/user/submitProblemInfo',
+  getSalesInfo: '/api/user/getSalesInfo'
+}
+
+/**
+ * @description: 首页banner
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: customizeSchemeInfo
+ */
+
+export function customizeSchemeInfo(paramter: any) {
+  return axios({
+    method: 'get',
+    url: api.customizeSchemeInfo,
+    params: paramter
+  })
 }
 
 /**
@@ -21,8 +40,53 @@ const api = {
 
 export function schemeProblemInfoList(paramter: any) {
   return axios({
-    method: 'post',
+    method: 'get',
     url: api.schemeProblemInfoList,
-    data: qs.stringify(paramter)
+    params: paramter
+  })
+}
+
+/**
+ * @description: 短信验证码
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: smsVerifyCode
+ */
+
+export function smsVerifyCode(parameter: any) {
+  return axios({
+    method: 'post',
+    url: api.smsVerifyCode,
+    data: qs.stringify(parameter)
+  })
+}
+
+/**
+ * @description: 方案问题提交
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: submitProblemInfo
+ */
+
+export function submitProblemInfo(parameter: any) {
+  return axios({
+    method: 'post',
+    url: api.submitProblemInfo,
+    data: qs.stringify(parameter)
+  })
+}
+
+/**
+ * @description: 用户销售查询
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: getSalesInfo
+ */
+
+export function getSalesInfo(parameter: any) {
+  return axios({
+    method: 'get',
+    url: api.getSalesInfo,
+    params: parameter
   })
 }

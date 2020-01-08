@@ -11,6 +11,19 @@
   }
 }
 
+.surveys-card-prev {
+  position: absolute;
+  width: 100px;
+  bottom: -32px;
+  left: 50%;
+  margin-left: -50px;
+  text-align: center;
+
+  .van-button {
+    width: 100px;
+  }
+}
+
 
 // 称呼
 .username {
@@ -25,6 +38,14 @@
       font-weight: 600;
       line-height: 24px;
       color: #272626;
+
+      &:nth-child(2) {
+        color: #FB937B;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        margin-top: 6px;
+      }
     }
   }
 
@@ -124,5 +145,90 @@
         padding: 6px 0;
       }
     }
+  }
+}
+
+// 年龄
+.age {
+
+  .age-title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+
+    p {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: #272626;
+
+      &:nth-child(2) {
+        color: #FB937B;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        margin-top: 6px;
+      }
+    }
+  }
+}
+
+// 家庭年收入
+.income {
+
+  .income-title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+
+    p {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: #272626;
+
+      &:nth-child(2) {
+        color: #FB937B;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        margin-top: 6px;
+      }
+    }
+  }
+}
+
+// 手机号
+.phone {
+
+  .phone-title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+
+    p {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: #272626;
+
+      &:nth-child(2) {
+        color: #FB937B;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        margin-top: 6px;
+      }
+    }
+  }
+
+  .van-field__control {
+    border-bottom: 1px solid #E9E9E9;
+    font-size: 16px;
+    height: 32px;
+  }
+
+  .van-cell:not(:last-child)::after {
+    border: 0;
   }
 }
