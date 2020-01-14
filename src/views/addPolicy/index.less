@@ -1,0 +1,177 @@
+// 添加保单
+.add {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  padding: 12px;
+  background: #f1f1f1;
+  padding-bottom: 48px;
+
+  .add-wrapper {
+
+    .add-upload {
+      background: #fff;
+      border-radius: 12px;
+      border-color: rgba(0, 0, 0, 0.09);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+
+      h4 {
+        color: #333333;
+        font-size: 14px;
+        font-weight: 600;
+        padding-right: 8px;
+      }
+
+      img  {
+        border:1px solid rgba(0, 0, 0, 0.09);
+        border-radius: 4px;
+      }
+
+      .van-uploader__upload, .van-uploader__preview {
+        margin: 0;
+      }
+    }
+
+    .add-info {
+      background: #fff;
+      border-radius: 12px;
+      border-color: rgba(0, 0, 0, 0.09);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+
+      .add-info-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #34302F;
+        padding: 6px 0;
+        width: 70px;
+        text-align: center;
+
+        &:after {
+          content: '';
+          display: block;
+          border-radius: 6px;
+          border: 3px solid #FDE4DE;
+        }
+      }
+
+      .add-target {
+        padding: 16px;
+        color: #323233;
+        display: flex;
+        align-items: flex-start;
+
+        .add-target-label {
+          flex: 0 0 106px;
+          display: flex;
+          align-items: center;
+          position: relative;
+
+          &::before {
+            position: absolute;
+            left: -5px;
+            color: #ee0a24;
+            font-size: 14px;
+            content: '*';
+          }
+
+          .van-icon {
+            font-size: 16px;
+            margin-right: 5px;
+          }
+        }
+        
+        .add-target-content {
+          display: flex;
+          flex-wrap: wrap;
+
+          .van-button {
+            margin: 0 6px 6px;
+            padding: 0 4px;
+          }
+        }
+      }
+      
+      .add-sex {
+        color: #323233;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+
+        .add-sex-label {
+          width: 112px;
+          display: flex;
+          align-items: center;
+
+          .van-icon {
+            font-size: 16px;
+            margin-right: 5px;
+          }
+        }
+      }
+
+      .add-birthday {
+        display: flex;
+        justify-content: space-between;
+
+        .van-cell__title {
+          flex: 0 0 70px;
+          position: relative;
+
+          &::before {
+            position: absolute;
+            left: -28px;
+            color: #ee0a24;
+            font-size: 14px;
+            content: '*';
+          }
+        }
+
+        .van-cell__value {
+          flex: 1;
+        }
+      }
+    }
+
+    .add-name {
+      background: #fff;
+      border-radius: 12px;
+      border-color: rgba(0, 0, 0, 0.09);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+
+      .add-name-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #34302F;
+        padding: 6px 0;
+        width: 70px;
+        text-align: center;
+
+        &:after {
+          content: '';
+          display: block;
+          border-radius: 6px;
+          border: 3px solid #FDE4DE;
+        }
+      }
+    }
+  }
+
+  .add-button {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+  }
+}

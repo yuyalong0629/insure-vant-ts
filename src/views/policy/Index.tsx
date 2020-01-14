@@ -1,5 +1,6 @@
 import { Component, Vue } from 'vue-property-decorator'
-import { myInsuranceInfo } from '@/api/index'
+import { myInsuranceInfo, login } from '@/api/index'
+import { wxAuth } from '@/utils/auth'
 import List from '@/components/GuaranteeList/List'
 import './index.less'
 
@@ -31,7 +32,28 @@ export default class Policy extends Vue {
 
   private mounted() {
     this.userId = this.$ls.get('userId')
-    this.getInsuranceInfo({ userId: this.userId, pageNo: this.pageNo })
+
+    if (this.userId) {
+      this.getInsuranceInfo({ userId: this.userId, pageNo: this.pageNo })
+    } else {
+      const state = (this.$route.query as any).csId || (this.$route.query as any).state
+      const href = window.location.href.split('&code')[0]
+
+      wxAuth.call(this, href, state).then(() => {
+        const params = {
+          type: 1,
+          code: this.$route.query.code,
+          state: state
+        }
+
+        login(params).then((res: any) => {
+          if (res.resultCode === '0') {
+            this.$ls.set('userId', res.userId)
+            this.getInsuranceInfo({ userId: res.userId, pageNo: this.pageNo })
+          }
+        })
+      })
+    }
   }
 
   private async getInsuranceInfo(params?: { userId: number, pageNo: number }) {
@@ -76,6 +98,13 @@ export default class Policy extends Vue {
     }, 500)
   }
 
+  // 点击添加保单
+  private handleAdd() {
+    this.$router.push({
+      path: '/addPolicy'
+    })
+  }
+
   public render() {
     return (
       <div class="guarantee">
@@ -97,7 +126,15 @@ export default class Policy extends Vue {
         </van-pull-refresh>
 
         <div class="guarantee-button">
-          <van-button color="#FC5D47" type="primary" round block>点击添加电子保单</van-button>
+          <van-button
+            color="#FC5D47"
+            type="primary"
+            round
+            block
+            onClick={this.handleAdd}
+          >
+            点击添加电子保单
+            </van-button>
         </div>
       </div >
     )

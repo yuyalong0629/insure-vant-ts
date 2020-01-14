@@ -1,0 +1,164 @@
+.userScheme {
+
+  .userScheme-introduction {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #34302F;
+      padding: 12px 0;
+      max-width: 80px;
+      text-align: center;
+    
+      &:after {
+        content: '';
+        display: block;
+        border-radius: 6px;
+        border: 3px solid #FDE4DE;
+      }
+    }
+
+    p {
+      color: #2C2C2D;
+      line-height: 18px;
+      font-size: 14px;
+    }
+  }
+
+  .userScheme-list {
+    background: #fff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+
+    .userScheme-list-user {
+      background: url('~@/assets/image/username_list.png') no-repeat top;
+      background-size: cover;
+      padding: 12px;
+      border-radius: 12px 12px 0 0;
+
+      .userScheme-list-user-top {
+        display: flex;
+        align-items: center;
+        
+        .userScheme-list-user-top-name {
+          margin-left: 12px;
+
+          h4 {
+            color: #212121;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 6px;
+          }
+  
+          p {
+            color: #212121;
+            font-weight: 500;
+          }
+        }
+      }
+
+      .userScheme-list-user-bottom {
+        display: flex;
+        justify-content: space-around;
+        padding: 12px 0 0;
+
+        li {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+
+          h4 {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+          }
+          
+          p {
+            color: #ffa320;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .userScheme-list-wrapper {
+      padding: 12px;
+      border-radius: 12px;
+
+      .userScheme-list-content {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #E5E5E5;
+        padding: 12px 0;
+
+        &:last-child {
+          border: 0;
+        }
+
+        .userScheme-list-title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .userScheme-list-title-icon {
+            flex: 0 0 120px;
+            display: flex;
+            align-items: center;
+
+            h5 {
+              font-size: 14px;
+              font-weight: 600;
+              margin-left: 12px;
+              color: #212121;
+            }
+          }
+        }
+
+        .userScheme-list-name {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 0;
+
+          h4 {
+            color: #080808;
+            font-size: 16px;
+            font-weight: bold;
+          }
+        }
+
+        .userScheme-list-label {
+          display: flex;
+          align-items: center;
+
+          .van-tag {
+            margin: 0 12px 6px 0;
+          }
+        }
+
+        .userScheme-list-href {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          p {
+            color: #B8B8B8;
+            font-size: 12px;
+          }
+
+          a {
+            color: #FF5E33;
+            display: flex;
+            align-items: center;
+            font-weight:bold;
+          }
+        }
+      }
+    }
+  }
+}

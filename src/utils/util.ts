@@ -11,18 +11,6 @@ export function timeFix() {
 }
 
 /**
- * @description: 微信网页授权
- * @param {String} appid [公众号的唯一标识]
- * @param {String} href [授权后重定向的回调链接地址， 请使用 urlEncode 对链接进行处理]
- * @param {String} state [重定向后会带上state参数]
- * @return: wxAuth
- */
-
-export async function wxAuth(appid: string, href: string, state: string) {
-  window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeURIComponent(href)}&response_type=code&scope=snsapi_userinfo&state=${state}&connect_redirect=1#wechat_redirect`
-}
-
-/**
  * @description: 日期格式化函数封装
  * @param {Dare} date [日期]
  * @param {String} fmt [target]

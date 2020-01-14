@@ -61,7 +61,7 @@ export default class Question extends Vue {
 
   public mounted() {
     const csId = this.$route.query.csId
-    const userId = this.$ls.get('userId') || 2
+    const userId = this.$ls.get('userId')
 
     // 问题列表
     schemeProblemInfoList({ csId: csId, userId: userId }).then((res: any) => {
@@ -425,7 +425,6 @@ export default class Question extends Vue {
   // 方案问题提交
   private getSubmit(params?: Submit) {
     return submitProblemInfo(params).then((res: any) => {
-      console.log(res)
       if (res.resultCode === '0') {
         this.$toast.success('提交成功!')
         this.$router.push({

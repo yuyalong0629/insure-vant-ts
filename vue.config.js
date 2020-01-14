@@ -37,8 +37,8 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        // target: 'http://ldsxapi.dameicm.cn',
-        target: 'http://192.168.0.106:9001',
+        target: 'http://ldsxapi.dameicm.cn',
+        // target: 'http://192.168.0.106:9001',
         // target: 'http://192.168.0.85:8089',
         ws: false,
         changeOrigin: true,

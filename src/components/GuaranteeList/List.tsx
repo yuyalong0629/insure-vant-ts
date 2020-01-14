@@ -9,18 +9,24 @@ interface Data {
 export default class List extends Vue {
   @Prop({ default: () => { } }) private data!: Data
 
+  private handleDetail(id: string) {
+    this.$router.push({
+      path: '/editPolicy',
+      query: { id }
+    })
+  }
+
   public render() {
     return (
-      <van-row class="list">
+      <van-row class="list" onClick={this.handleDetail.bind(this, (this as any).data.id)}>
         <van-col span="24">
           <div class="list-top">
             <h4>{this.data.insuranceName}</h4>
-            <p>{this.data.insuranceFee}元</p>
           </div>
-          <p class="list-name">被保人：{this.data.insuredName} </p>
           <span class="list-bottom">
-            <p>保单生效时间：{this.data.effectiveTime} </p>
-            <p>保单期满时间：{this.data.maturityTime}</p>
+            <p>被保人：{this.data.insuredName} </p>
+            <p>性别：{this.data.gender === 1 ? '男' : '女'} </p>
+            <p>出生日期：{this.data.birthday}</p>
           </span>
         </van-col>
       </van-row>

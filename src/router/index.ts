@@ -35,6 +35,24 @@ const routes = [
     name: 'policy',
     meta: { title: '保单管理', hidden: false },
     component: () => import('@/views/policy/Index')
+  },
+  {
+    path: '/addPolicy',
+    name: 'addPolicy',
+    meta: { title: '添加电子保单', hidden: false },
+    component: () => import('@/views/addPolicy/add')
+  },
+  {
+    path: '/editPolicy',
+    name: 'editPolicy',
+    meta: { title: '查看电子保单', hidden: false },
+    component: () => import('@/views/addPolicy/edit')
+  },
+  {
+    path: '/scheme',
+    name: 'scheme',
+    meta: { title: '方案', hidden: false },
+    component: () => import('@/views/scheme/Index')
   }
 ]
 

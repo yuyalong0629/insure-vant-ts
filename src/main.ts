@@ -22,7 +22,12 @@ import {
   GridItem,
   Dialog,
   List,
-  PullRefresh
+  PullRefresh,
+  Uploader,
+  Icon,
+  Tab,
+  Tabs,
+  Tag
 } from 'vant'
 
 Vue.use(Image)
@@ -41,6 +46,10 @@ Vue.use(Grid).use(GridItem)
 Vue.use(Dialog)
 Vue.use(List)
 Vue.use(PullRefresh)
+Vue.use(Uploader)
+Vue.use(Icon)
+Vue.use(Tab).use(Tabs)
+Vue.use(Tag)
 
 Vue.config.productionTip = false
 

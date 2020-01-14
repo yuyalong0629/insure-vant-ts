@@ -1,0 +1,108 @@
+.scheme {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  background: #f7f8fa;
+
+  .scheme-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+
+    .scheme-header {
+      min-height: 208px;
+      background: url('~@/assets/image/scheme-header.png') no-repeat top;
+      background-size: cover;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 12px;
+
+      .shceme-header-content {
+        width: 94%;
+        min-height: 110px;
+        background: #fff;
+        border-radius: 8px;
+        padding-top: 12px;
+
+        .tab-list {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .van-tabs--line .van-tabs__wrap {
+          min-height: 90px;
+        }
+
+        [class*=van-hairline]::after {
+          border: 0;
+        }
+      }
+    }
+
+    .scheme-content {
+      width: 94%;
+      border-radius: 8px;
+    }
+
+    .scheme-qrcode {
+      width: 94%;
+      display: flex;
+      align-items: center;
+      padding: 24px 18px;
+      background: #fff;
+      border-radius: 12px;
+      margin: 12px 0;
+
+      .scheme-qrcode-left {
+        flex: 0 0 70px;
+      }
+
+      .scheme-qrcode-middle {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 6px;
+
+        span {
+          display: flex;
+          align-items: center;
+
+          h4 {
+            color: #2C2C2C;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 4px;
+          }
+
+          p {
+            background:linear-gradient(56deg,rgba(247,119,61,0.94),rgba(255,202,62,0.94));
+            border-radius:5px;
+            font-size:12px;
+            font-weight:500;
+            font-style:italic;
+            color:rgba(255,255,255,1);
+            padding: 2px 4px;
+          }
+        }
+
+        .scheme-qrcode-middle-text {
+          color: #2c2c2c;
+          font-weight: 500;
+          font-size: 14px;
+          margin-top: 6px;
+          line-height: 16px;
+        }
+      }
+
+      .scheme-qrcode-right {
+        flex: 0 0 60px;
+      }
+    }
+  }
+}

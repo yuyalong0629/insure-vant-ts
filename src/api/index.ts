@@ -15,7 +15,15 @@ const api = {
   submitProblemInfo: '/api/user/submitProblemInfo',
   getSalesInfo: '/api/user/getSalesInfo',
   schemePriceInfoList: '/api/bx/schemePriceInfoList',
-  myInsuranceInfo: '/api/user/myInsuranceInfo'
+  myInsuranceInfo: '/api/user/myInsuranceInfo',
+  basicData: '/api/basicData',
+  addOrUpdateInsuranceInfo: '/api/user/addOrUpdateInsuranceInfo',
+  insuranceInfo: '/api/user/insuranceInfo',
+  mySchemeInfo: '/api/user/mySchemeInfo',
+  wxShareSign: '/api/share/wxShareSign',
+  login: '/api/login',
+  confirmPay: '/api/pay/confirm_pay',
+  callbackPay: '/api/pay/pay_callback'
 }
 
 /**
@@ -120,5 +128,144 @@ export function myInsuranceInfo(parameter: any) {
     method: 'get',
     url: api.myInsuranceInfo,
     params: parameter
+  })
+}
+
+/**
+ * @description: 保单管理 => 图片上传
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: upload
+ */
+
+export function upload(parameter: any) {
+  return axios({
+    method: 'post',
+    url: 'http://upload.dameicm.cn/upload.htm?app=bxImage&type=json',
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    withCredentials: true,
+    data: parameter
+  })
+}
+
+/**
+ * @description: 保单管理 => 基础数据
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: basicData
+ */
+
+export function basicData(parameter: any) {
+  return axios({
+    method: 'get',
+    url: api.basicData,
+    params: parameter
+  })
+}
+
+/**
+ * @description: 保单管理 => 添加保单信息提交
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: addOrUpdateInsuranceInfo
+ */
+
+export function addOrUpdateInsuranceInfo(parameter: any) {
+  return axios({
+    method: 'post',
+    url: api.addOrUpdateInsuranceInfo,
+    data: qs.stringify(parameter)
+  })
+}
+
+/**
+ * @description: 保单管理 => 添加保单信息详情
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: insuranceInfo
+ */
+
+export function insuranceInfo(parameter: any) {
+  return axios({
+    method: 'get',
+    url: api.insuranceInfo,
+    params: parameter
+  })
+}
+
+/**
+ * @description: 方案 => 方案信息
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: mySchemeInfo
+ */
+
+export function mySchemeInfo(parameter: any) {
+  return axios({
+    method: 'get',
+    url: api.mySchemeInfo,
+    params: parameter
+  })
+}
+
+/**
+ * @description: 公共 => 微信分享
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: wxShareSign
+ */
+
+export function wxShareSign(parameter: any) {
+  return axios({
+    method: 'get',
+    url: api.wxShareSign,
+    params: parameter
+  })
+}
+
+/**
+ * @description: 公共 => 微信授权登录
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: login
+ */
+
+export function login(parameter: any) {
+  return axios({
+    method: 'post',
+    url: api.login,
+    data: qs.stringify(parameter)
+  })
+}
+
+/**
+ * @description: 公共 => 微信支付
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: confirmPay
+ */
+
+export function confirmPay(parameter: any) {
+  return axios({
+    method: 'post',
+    url: api.confirmPay,
+    data: qs.stringify(parameter)
+  })
+}
+
+/**
+ * @description: 公共 => 微信支付回调
+ * @param {string} method [请求方式]
+ * @param {object} params [传入参数]
+ * @return: callbackPay
+ */
+
+export function callbackPay(parameter: any) {
+  return axios({
+    method: 'post',
+    url: api.callbackPay,
+    data: qs.stringify(parameter)
   })
 }
