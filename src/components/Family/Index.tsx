@@ -9,6 +9,7 @@ import './index.less'
 })
 export default class Family extends Vue {
   @Prop({ default: () => { } }) private sumInsured!: any
+  @Prop({ default: () => { } }) private insuranceFee!: any
   @Prop({ default: () => { } }) private pieData!: any
   @Prop({ default: () => { } }) private schemeData!: any
 
@@ -22,25 +23,25 @@ export default class Family extends Vue {
               {
                 this.sumInsured.illness !== 0 ? <li class="family-table-item">
                   <p>重疾保额</p>
-                  <p>{`${this.sumInsured.illness}元`}</p>
+                  <p>{`${this.sumInsured.illness}万元`}</p>
                 </li> : ''
               }
               {
                 this.sumInsured.life !== 0 ? <li class="family-table-item">
                   <p>寿险保额</p>
-                  <p>{`${this.sumInsured.life}元`}</p>
+                  <p>{`${this.sumInsured.life}万元`}</p>
                 </li> : ''
               }
               {
                 this.sumInsured.medical !== 0 ? <li class="family-table-item">
                   <p>医疗保额</p>
-                  <p>{`${this.sumInsured.medical}元`}</p>
+                  <p>{`${this.sumInsured.medical}万元`}</p>
                 </li> : ''
               }
               {
                 this.sumInsured.accident !== 0 ? <li class="family-table-item">
                   <p>意外保障</p>
-                  <p>{`${this.sumInsured.accident}元`}</p>
+                  <p>{`${this.sumInsured.accident}万元`}</p>
                 </li> : ''
               }
             </ul>
@@ -48,7 +49,7 @@ export default class Family extends Vue {
 
           <div class="family-table-right">
             <h4>家庭总保费</h4>
-            <p>{`${this.sumInsured.life + this.sumInsured.illness + this.sumInsured.medical + this.sumInsured.accident}元`}</p>
+            <p>{`${this.insuranceFee.life + this.insuranceFee.illness + this.insuranceFee.medical + this.insuranceFee.accident}元`}</p>
           </div>
         </van-col>
 
@@ -81,10 +82,10 @@ export default class Family extends Vue {
                 return <van-row class="family-exclusive-list family-exclusive-list-content">
                   <van-col span="3">{d.typeStr}</van-col>
                   <van-col span="6">{d.name}</van-col>
-                  <van-col span="3">{d.insuranceAmount}</van-col>
-                  <van-col span="4">{d.insuranceYear}年</van-col>
+                  <van-col span="3">{d.insuranceAmount}万</van-col>
+                  <van-col span="4">{d.insuranceYear === 0 ? '终身' : `${d.insuranceYear}年`}</van-col>
                   <van-col span="4">{d.payDuration}年</van-col>
-                  <van-col span="4">{d.periodFee}</van-col>
+                  <van-col span="4">{d.periodFee}元</van-col>
                 </van-row>
               })}
             </div>

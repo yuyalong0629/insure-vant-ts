@@ -3,6 +3,7 @@ import Permisson from '../permisson/Index'
 import Family from '@/components/Family/Index'
 import UserScheme from '@/components/UserScheme/Index'
 import Service from '@/components/Service/Index'
+import Start from '@/components/Start/Index'
 
 import { mySchemeInfo, wxShareSign, login } from '@/api/index'
 import { wxAuth } from '@/utils/auth'
@@ -37,7 +38,8 @@ interface Share {
     Permisson,
     Family,
     UserScheme,
-    Service
+    Service,
+    Start
   }
 })
 export default class Scheme extends Vue {
@@ -46,12 +48,15 @@ export default class Scheme extends Vue {
   private tabList!: any[]
   private tabListImg!: TabImg[]
   private sumInsured!: SumInsured
+  private insuranceFee!: SumInsured
   private pieData!: any
   private chartColor!: string[]
   private schemeData!: any
   private componentId!: string
   private userSchemeInfos!: any[]
   private salesInfoMap!: SalesInfoMap
+  private start!: boolean
+  private userProblemInfo!: any
 
   private data() {
     return {
@@ -74,6 +79,13 @@ export default class Scheme extends Vue {
       chartColor: ['#ff7f50', '#87cefa', '#da70d6', '#32cd32', '#6495ed', '#ff69b4', '#ba55d3', '#cd5c5c', '#ffa500', '#40e0d0', '#1e90ff', '#ff6347', '#7b68ee', '#00fa9a', '#ffd700', '#6699FF', '#ff6666', '#3cb371', '#b8860b', '#30e0e0'],
       // 保额分布
       sumInsured: {
+        illness: 0, // 重疾
+        life: 0, // 寿险
+        medical: 0, // 医疗
+        accident: 0 // 意外
+      },
+      // 保费分布
+      insuranceFee: {
         illness: 0, // 重疾
         life: 0, // 寿险
         medical: 0, // 医疗
@@ -106,56 +118,60 @@ export default class Scheme extends Vue {
       schemeData: [],
       componentId: '家庭状况',
       userSchemeInfos: [],
-      salesInfoMap: {}
+      salesInfoMap: {},
+      start: false,
+      userProblemInfo: {}
     }
   }
 
   private mounted() {
     this.userId = this.$ls.get('userId')
 
-    if (this.userId) {
+    const id = (this.$route.query as any).id
+
+    if (id) {
       this.getMySchemeInfo({ userId: this.userId, id: (this.$route.query as any).id })
     } else {
-      const state = (this.$route.query as any).id || (this.$route.query as any).state
-      const href = window.location.href.split('&code')[0]
+      if (this.userId) {
+        this.getMySchemeInfo({ userId: this.userId, id: (this.$route.query as any).id })
+      } else {
+        const state = (this.$route.query as any).id || (this.$route.query as any).state
+        const href = window.location.href.split('&code')[0]
 
-      wxAuth.call(this, href, state).then(() => {
-        const params = {
-          type: 1,
-          code: this.$route.query.code,
-          state: state
-        }
-
-        login(params).then((res: any) => {
-          if (res.resultCode === '0') {
-            this.$ls.set('userId', res.userId)
-            this.getMySchemeInfo({ userId: res.userId, id: state })
+        wxAuth.call(this, href, state).then(() => {
+          const params = {
+            type: 1,
+            code: this.$route.query.code,
+            state: state
           }
+
+          login(params).then((res: any) => {
+            if (res.resultCode === '0') {
+              this.$ls.set('userId', res.userId)
+              this.getMySchemeInfo({ userId: res.userId, id: state })
+            }
+          })
         })
-      })
+      }
     }
   }
 
   private getMySchemeInfo(params?: Params) {
     return mySchemeInfo(params).then((res: any) => {
       if (res.resultCode === '0') {
-        // 分享
         // WX Share
         const params: Share = {
-          userId: this.$ls.get('userId'),
+          userId: this.$ls.get('userId') || 0,
           url: encodeURIComponent(window.location.href)
         }
 
+        this.userProblemInfo = res.userProblemInfo
+
+        const userProblemInfo = `${res.userProblemInfo.name}${res.userProblemInfo.gender === 0 ? '女士' : '先生'}专属保险方案`
+
         wxShareSign(params).then((res: any) => {
           if (res.resultCode === '0') {
-            // wxShare(res.appid,
-            //   res.timestamp,
-            //   res.noncestr,
-            //   res.signature,
-            //   customizeSchemeInfoMap.summary,
-            //   `${window.location.href.split('&code')[0]}&state=${(this.$route.query as any).csId || (this.$route.query as any).state}`,
-            //   'http://ldsx.dameicm.cn/img/fximg.png'
-            // )
+            wxShare(res.appid, res.timestamp, res.noncestr, res.signature, userProblemInfo, `老端说险，买保险不花冤枉钱！`, `${window.location.href.split('&code')[0]}&state=${(this.$route.query as any).id || (this.$route.query as any).state}`, `http://upload.dameicm.cn/bximages/share.png`)
           }
         })
 
@@ -181,20 +197,37 @@ export default class Scheme extends Vue {
 
         // 处理家庭保障分布数据
         res.userSchemeInfos.forEach((item: any) => {
+          // 保额
+          if (item.insuranceAmountByTypeMap.type1) {
+            this.sumInsured.illness += +item.insuranceAmountByTypeMap.type1
+          }
+
+          if (item.insuranceAmountByTypeMap.type2) {
+            this.sumInsured.life += +item.insuranceAmountByTypeMap.type2
+          }
+
+          if (item.insuranceAmountByTypeMap.type3) {
+            this.sumInsured.medical += +item.insuranceAmountByTypeMap.type3
+          }
+
+          if (item.insuranceAmountByTypeMap.type4) {
+            this.sumInsured.accident += +item.insuranceAmountByTypeMap.type4
+          }
+          // 保费
           if (item.insuranceFeeByTypeMap.type1) {
-            this.sumInsured.illness += +item.insuranceFeeByTypeMap.type1
+            this.insuranceFee.illness += +item.insuranceFeeByTypeMap.type1
           }
 
           if (item.insuranceFeeByTypeMap.type2) {
-            this.sumInsured.life += +item.insuranceFeeByTypeMap.type2
+            this.insuranceFee.life += +item.insuranceFeeByTypeMap.type2
           }
 
           if (item.insuranceFeeByTypeMap.type3) {
-            this.sumInsured.medical += +item.insuranceFeeByTypeMap.type4
+            this.insuranceFee.medical += +item.insuranceFeeByTypeMap.type3
           }
 
           if (item.insuranceFeeByTypeMap.type4) {
-            this.sumInsured.accident += +item.insuranceFeeByTypeMap.type4
+            this.insuranceFee.accident += +item.insuranceFeeByTypeMap.type4
           }
         })
 
@@ -271,71 +304,88 @@ export default class Scheme extends Vue {
     this.componentId = recored.name
   }
 
+  private handleSatrt(start: boolean) {
+    this.start = start
+  }
+
   public render() {
     if (this.permisson) {
       return (
         <Permisson props={{ permisson: this.permisson }} />
       )
     } else {
-      const { userSchemeInfos } = this
-      const target = userSchemeInfos.filter((item: any) => this.componentId === item.dataName)[0]
+      if (!this.start) {
+        return (
+          <Start props={{ userProblemInfo: this.userProblemInfo, salesInfoMap: this.salesInfoMap }} on-handleSatrt={this.handleSatrt} />
+        )
+      } else {
+        const { userSchemeInfos } = this
+        const datasource = userSchemeInfos.map((d: any) => {
+          return {
+            ...d,
+            src: this.tabListImg.filter((i: any) => d.dataName === i.name)[0].img
+          }
+        })
+        const target = datasource.filter((item: any) => this.componentId === item.dataName)[0]
 
-      return (
-        <div class="scheme">
-          <van-row class="scheme-wrapper">
-            <van-col span="24" class="scheme-header">
-              <div class="shceme-header-content">
-                <van-tabs>
-                  {this.tabList.map((item: TabImg) => {
-                    return <van-tab>
-                      <div slot="title" class="tab-list">
-                        <van-image
-                          width="42"
-                          height="42"
-                          lazy-load
-                          round
-                          onClick={this.handleTab.bind(this, item)}
-                          src={item.img}
-                        />
-                        <span onClick={this.handleTab.bind(this, item)}>{item.name}</span>
-                      </div>
-                    </van-tab>
-                  })}
-                </van-tabs>
-              </div>
-            </van-col>
+        return (
+          <div class="scheme">
+            <van-row class="scheme-wrapper">
+              <van-col span="24" class="scheme-header">
+                <div class="shceme-header-content">
+                  <van-tabs>
+                    {this.tabList.map((item: TabImg) => {
+                      return <van-tab>
+                        <div slot="title" class="tab-list">
+                          <van-image
+                            width="42"
+                            height="42"
+                            lazy-load
+                            round
+                            onClick={this.handleTab.bind(this, item)}
+                            src={item.img}
+                          />
+                          <span onClick={this.handleTab.bind(this, item)}>{item.name}</span>
+                        </div>
+                      </van-tab>
+                    })}
+                  </van-tabs>
+                </div>
+              </van-col>
 
-            <van-col span="24" class="scheme-content">
-              {this.componentId === '家庭状况' ? <Family
-                props={{ sumInsured: this.sumInsured, pieData: this.pieData, schemeData: this.schemeData }}
-              /> : this.componentId === '贴心服务' ? <Service /> : <UserScheme props={{ userInfo: target }} />}
-            </van-col>
+              <van-col span="24" class="scheme-content">
+                {this.componentId === '家庭状况' ? <Family
+                  props={{ sumInsured: this.sumInsured, insuranceFee: this.insuranceFee, pieData: this.pieData, schemeData: this.schemeData }}
+                /> : this.componentId === '贴心服务' ? <Service /> : <UserScheme props={{ userInfo: target }} />}
+              </van-col>
 
-            <van-col span="24" class="scheme-qrcode">
-              <van-image
-                round
-                width="70"
-                height="70"
-                class="scheme-qrcode-left"
-                src={this.salesInfoMap.imageUrl}
-              />
-              <div class="scheme-qrcode-middle">
-                <span>
-                  <h4>{this.salesInfoMap.name}</h4>
-                  <p>专属规划师</p>
-                </span>
-                <p class="scheme-qrcode-middle-text">{`${this.salesInfoMap.jobTitle}-${this.salesInfoMap.caption}`}</p>
-              </div>
-              <van-image
-                width="60"
-                height="60"
-                class="scheme-qrcode-right"
-                src={this.salesInfoMap.wxImage}
-              />
-            </van-col>
-          </van-row>
-        </div>
-      )
+              <van-col span="24" class="scheme-qrcode">
+                <van-image
+                  round
+                  width="70"
+                  height="70"
+                  style={{ 'background': 'linear-gradient(#bbbcc0, #a9aeaf)' }}
+                  class="scheme-qrcode-left"
+                  src={this.salesInfoMap.imageUrl}
+                />
+                <div class="scheme-qrcode-middle">
+                  <span>
+                    <h4>{this.salesInfoMap.name}</h4>
+                    <p>专属规划师</p>
+                  </span>
+                  <p class="scheme-qrcode-middle-text">{`${this.salesInfoMap.jobTitle}`}</p>
+                </div>
+                <van-image
+                  width="60"
+                  height="60"
+                  class="scheme-qrcode-right"
+                  src={this.salesInfoMap.wxImage}
+                />
+              </van-col>
+            </van-row>
+          </div>
+        )
+      }
     }
   }
 }

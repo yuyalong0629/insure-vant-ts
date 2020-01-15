@@ -3,7 +3,7 @@
  * @param {type} *
  * @return:
  */
-export default function wxShare(appId: string, timestamp: string, nonceStr: string, signature: string, desc: string, link: string, imgUrl: string) {
+export default function wxShare(appId: string, timestamp: string, nonceStr: string, signature: string, title: string, desc: string, link: string, imgUrl: string) {
   wx.config({
     debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId: appId, // 必填，公众号的唯一标识
@@ -15,7 +15,7 @@ export default function wxShare(appId: string, timestamp: string, nonceStr: stri
 
   wx.ready(function () {
     wx.updateAppMessageShareData({
-      title: '老端说险', // 分享标题
+      title: title, // 分享标题
       desc: desc, // 分享描述
       link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
       imgUrl: imgUrl, // 分享图标
@@ -25,7 +25,7 @@ export default function wxShare(appId: string, timestamp: string, nonceStr: stri
     })
 
     wx.onMenuShareWeibo({
-      title: '老端说险', // 分享标题
+      title: title, // 分享标题
       desc: desc, // 分享描述
       link: link, // 分享链接
       imgUrl: imgUrl, // 分享图标

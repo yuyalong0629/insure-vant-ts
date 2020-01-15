@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    meta: { title: '首页', hidden: false },
+    meta: { title: '家庭保险咨询服务', hidden: false },
     component: () => import('@/views/home/Index')
   },
   {
@@ -21,7 +21,7 @@ const routes = [
   {
     path: '/payment',
     name: 'payment',
-    meta: { title: '咨询方案', hidden: false },
+    meta: { title: '咨询服务计划选择', hidden: false },
     component: () => import('@/views/payment/Index')
   },
   {
@@ -51,7 +51,7 @@ const routes = [
   {
     path: '/scheme',
     name: 'scheme',
-    meta: { title: '方案', hidden: false },
+    meta: { title: '您的专属方案', hidden: false },
     component: () => import('@/views/scheme/Index')
   }
 ]

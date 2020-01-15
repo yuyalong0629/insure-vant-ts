@@ -124,7 +124,7 @@ export default class UserName extends Vue {
             />
           })}
         </van-col>
-        <van-col span="24" class="surveys-card-next">
+        <van-col class="surveys-card-next" span="24">
           <van-button color="#fb5949" size="small" round disabled={!target.answer || !target.next ? true : false} onClick={this.handleNext.bind(this, event, target.next)}>下一步</van-button>
         </van-col>
         <van-col span="24" class="surveys-card-prev">

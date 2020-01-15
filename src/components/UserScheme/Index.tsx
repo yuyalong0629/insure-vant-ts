@@ -19,7 +19,7 @@ export default class UserScheme extends Vue {
                 round
                 width="42px"
                 height="42px"
-                src="https://img.yzcdn.cn/vant/cat.jpeg"
+                src={this.userInfo.src}
               />
               <div class="userScheme-list-user-top-name">
                 <h4>{this.userInfo.dataName}</h4>
@@ -55,7 +55,6 @@ export default class UserScheme extends Vue {
                 <div class="userScheme-list-name">
                   <h4>{item.name}</h4>
                   <van-image
-                    round
                     width="42px"
                     height="42px"
                     src={item.logoImage}
@@ -63,7 +62,7 @@ export default class UserScheme extends Vue {
                 </div>
                 <div class="userScheme-list-label">
                   <van-tag color="#F27857">保额: {item.insuranceAmount}万元</van-tag>
-                  <van-tag color="#F27857">保障期限: {item.insuranceYear}年</van-tag>
+                  <van-tag color="#F27857">保障期限: {item.insuranceYear === 0 ? '终身' : `${item.insuranceYear}年`}</van-tag>
                   <van-tag color="#F27857">缴费类型: {item.payType === 1 ? '年交' : item.payType === 2 ? '月交' : '趸交'}</van-tag>
                 </div>
                 <div class="userScheme-list-href">

@@ -78,7 +78,7 @@ export default class Home extends Vue {
 
         wxShareSign(params).then((res: any) => {
           if (res.resultCode === '0') {
-            wxShare(res.appid, res.timestamp, res.noncestr, res.signature, customizeSchemeInfoMap.summary, `${window.location.href.split('&code')[0]}&state=${(this.$route.query as any).csId || (this.$route.query as any).state}`, 'http://ldsx.dameicm.cn/img/fximg.png')
+            wxShare(res.appid, res.timestamp, res.noncestr, res.signature, customizeSchemeInfoMap.name, customizeSchemeInfoMap.summary, `${window.location.href.split('&code')[0]}&state=${(this.$route.query as any).csId || (this.$route.query as any).state}`, `http://upload.dameicm.cn/bximages/share.png`)
           }
         })
       }
@@ -103,7 +103,6 @@ export default class Home extends Vue {
         <van-image
           width="100%"
           height="100%"
-          lazy-load
           src={this.mainPic} />
         <van-button color="linear-gradient(to right, #fb3849, #fb5949)" class="home-subscribe" onClick={this.handleTo}>预约咨询</van-button>
       </div>

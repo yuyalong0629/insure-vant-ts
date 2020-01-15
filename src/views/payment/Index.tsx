@@ -32,7 +32,9 @@ export default class Payment extends Vue {
 
   private mounted() {
     const csId = this.$route.query.csId
-    const userId = this.$ls.get('userId') || 2
+    const userId = this.$ls.get('userId')
+
+    this.$ls.set('csId', csId)
 
     schemePriceInfoList({ csId: csId, userId: userId }).then((res: any) => {
       if (res.resultCode === '0') {

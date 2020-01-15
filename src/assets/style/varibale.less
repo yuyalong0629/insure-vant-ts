@@ -1,0 +1,41 @@
+// 布局容器固定宽度
+.basicWidth() {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+// 高度塌陷
+.clearfix() {
+  display: block;
+  content: 'clear';
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+// 单行文本溢出省略
+.ellipsisOne() {
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+  text-overflow: ellipsis;
+}
+
+// 多行文本溢出省略 (行数)
+.ellipsisMore() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+// 多行文本溢出省略 (高度) => 单纯截断文字, 不展示省略号，观感上较为生硬
+.ellipsisHeight() {
+  overflow: hidden;
+  line-height: 20px;
+  max-height: 40px;
+}

@@ -281,7 +281,7 @@ export default class Question extends Vue {
           }
         })
       } else {
-        this.$toast.fail(res.resultMsg)
+        this.$toast(res.resultMsg)
       }
     })
   }
@@ -426,7 +426,7 @@ export default class Question extends Vue {
   private getSubmit(params?: Submit) {
     return submitProblemInfo(params).then((res: any) => {
       if (res.resultCode === '0') {
-        this.$toast.success('提交成功!')
+        this.$toast('提交成功!')
         this.$router.push({
           path: '/market',
           query: {
@@ -437,7 +437,7 @@ export default class Question extends Vue {
       }
       this.$toast.fail(res.resultMsg)
     }).catch(() => {
-      this.$toast.fail('请求超时')
+      this.$toast('请求超时')
     })
   }
 

@@ -27,7 +27,7 @@ export function payment(this: any, appId: string, timeStamp: string, nonceStr: s
         this.$router.push({
           path: '/surveys',
           query: {
-            csId: this.$route.query.csId
+            csId: this.$ls.get('csId')
           }
         })
       })
