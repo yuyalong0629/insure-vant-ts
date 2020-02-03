@@ -161,6 +161,7 @@ export default class Phone extends Vue {
             v-model={target.sms}
             center
             clearable
+            maxlength="6"
             placeholder="请输入短信验证码"
             error-message={this.checkCode}
           >

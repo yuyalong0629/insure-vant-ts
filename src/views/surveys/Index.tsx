@@ -385,17 +385,19 @@ export default class Question extends Vue {
 
       // 家庭负债情况
       if (item.problemFlag === 'debt') {
+        const target = item.problemOption.filter((i: any) => i.active)
         return {
           id: item.id,
-          option: item.answer
+          option: target.map((d: any) => d.optionContent)
         }
       }
 
       // 健康情况
       if (item.problemFlag === 'health') {
+        const target = item.problemOption.filter((i: any) => i.active)
         return {
           id: item.id,
-          option: item.answer
+          option: target.map((d: any) => d.optionContent)
         }
       }
 
@@ -419,6 +421,7 @@ export default class Question extends Vue {
       token: token,
       problemInfo: encodeURIComponent(JSON.stringify(result.flat()))
     }
+
     this.getSubmit(params)
   }
 

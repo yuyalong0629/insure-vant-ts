@@ -27,7 +27,7 @@ const routes = [
   {
     path: '/market',
     name: 'market',
-    meta: { title: '销售名片', hidden: false },
+    meta: { title: '规划师名片', hidden: false },
     component: () => import('@/views/market/Index')
   },
   {

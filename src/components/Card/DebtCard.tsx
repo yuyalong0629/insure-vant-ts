@@ -36,8 +36,18 @@ export default class Debt extends Vue {
     }
   }
 
-  private onCancel() {
-    this.show = false
+  private handleToggle(name: string, num: number) {
+    const { incomeInfo } = this
+    const target = (incomeInfo as any).filter((item: ProblemList) => item.problemFlag === 'debt')[0]
+    if (target) {
+      target.answer = name
+
+      const problemOption = target.problemOption.filter((item: any, index: number) => num === index)[0]
+      problemOption.active = !problemOption.active
+
+      this.incomeInfo = [...incomeInfo]
+      this.checkImage(this.incomeInfo)
+    }
   }
 
   // 下一步
@@ -76,7 +86,7 @@ export default class Debt extends Vue {
 
         <van-col span="24" class="income-input">
           <van-cell-group>
-            <van-cell title="选择负债情况" value={target.answer} onClick={this.handleIncome} is-link />
+            <van-cell title="选择负债情况" value={target.answer ? `${target.answer}...` : ''} onClick={this.handleIncome} is-link />
           </van-cell-group>
         </van-col>
 
@@ -92,14 +102,25 @@ export default class Debt extends Vue {
           <van-popup
             get-container="body"
             v-model={this.show}
+            closeable
             position="bottom"
+            style={{ padding: '48px 24px' }}
           >
-            <van-picker
-              show-toolbar
-              columns={target.problemOption}
-              on-cancel={this.onCancel}
-              on-confirm={this.onConfirm}
-            />
+            <van-row type="flex" gutter="16" justify="space-around">
+              {target.problemOption.map((item: any, index: number) => {
+                return <van-col style={{ padding: '6px' }} >
+                  <van-button
+                    block
+                    plain
+                    type="info"
+                    size="small"
+                    icon={item.active ? 'success' : ''}
+                    color={!item.active ? '#4bb0ff' : '#fb5949'}
+                    onClick={this.handleToggle.bind(this, item.optionContent, index)}
+                  >{item.optionContent}</van-button>
+                </van-col>
+              })}
+            </van-row>
           </van-popup>
         </van-col>
       </van-row>

@@ -362,8 +362,8 @@ export default class Scheme extends Vue {
               <van-col span="24" class="scheme-qrcode">
                 <van-image
                   round
-                  width="70"
-                  height="70"
+                  width="60"
+                  height="60"
                   style={{ 'background': 'linear-gradient(#bbbcc0, #a9aeaf)' }}
                   class="scheme-qrcode-left"
                   src={this.salesInfoMap.imageUrl}

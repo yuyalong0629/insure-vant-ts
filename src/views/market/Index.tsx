@@ -18,6 +18,19 @@ export default class Market extends Vue {
     }
   }
 
+  // 解决微信长按二维码识别无效
+  beforeRouteEnter(to: any, from: any, next: any) {
+    const location = window.location
+    const u = navigator.userAgent
+    let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
+    if (isiOS && to.path !== location.pathname) {
+      // 此处不能使用location.replace
+      location.assign(to.fullPath)
+    } else {
+      next()
+    }
+  }
+
   private mounted() {
     const userId = this.$ls.get('userId')
     const phone = this.$route.query.phone + ''
@@ -88,10 +101,11 @@ export default class Market extends Vue {
         </van-row>
         <van-dialog
           v-model={this.show}
-          title="扫码添加微信"
+          title="规划师名片"
           show-cancel-button
+          style={{ 'text-align': 'center' }}
         >
-          <img width="100%" height="200" src={this.salesInfoMap.wxImage} alt="" />
+          <img width="300" height="300" src={this.salesInfoMap.wxImage} alt="" />
         </van-dialog>
       </div>
     )
